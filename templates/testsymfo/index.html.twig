@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - testsymfo{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center m-3">Bienvenue sur la page de testSymfo</h1>
+
+{% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+{% endfor %}
+
+{% set currentSortField = app.request.query.get('sort', 'id') %}
+{% set currentSortOrder = app.request.query.get('order', 'asc') %}
+{% set inverseSortOrder = currentSortOrder == 'asc' ? 'desc' : 'asc' %}
+
+<div class="container">
+<table class="table table-bordered" border="2">
+    <thead>
+        <tr class="table-warning">
+            <th scope="col" class="text-center text-dark"><a href="{{ path('testsymfo_app', { sort: 'id', order: currentSortField == 'id' ? inverseSortOrder : 'asc' }) }}">Numéro</th>
+            <th scope="col" class="text-center text-dark"><a href="{{ path('testsymfo_app', { sort: 'name', order: currentSortField == 'name' ? inverseSortOrder : 'asc'  }) }}">Nom</th>
+            <th scope="col" class="text-center text-dark"><a href="{{ path('testsymfo_app', { sort: 'firstName', order: currentSortField == 'firstName' ? inverseSortOrder : 'asc' }) }}">Prénom</th>
+            <th scope="col" class="text-center text-dark"><a href="{{ path('testsymfo_app', { sort: 'birthDate', order: currentSortField == 'birthDate' ? inverseSortOrder : 'asc'  }) }}">Date de Naissance</th>
+            <th scope="col" class="text-center text-dark">Age</th>
+            <th scope="col" class="text-center text-dark"><a href="{{ path('testsymfo_app', { sort: 'type', order: currentSortField == 'type' ? inverseSortOrder : 'asc'  }) }}">Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for entity in entities %}
+        <tr class="{{ loop.index is odd ? 'table-secondary' : 'table-tertiary' }}">
+            <th scope="row" class="text-center"><a href="{{ path('testsymfo_show', {id: entity.id})}}">{{ entity.id}}</a></th>
+            <td class="text-center">{{ entity.name|upper }}</td>
+            <td class="text-center">
+            {% if '-' in entity.firstName %}
+                {{ entity.firstName|split('-')|map(partie => partie|capitalize)|join('-') }}
+            {% else %}
+                {{ entity.firstName|capitalize }}
+            {% endif %}
+            </td>
+
+            {# <td class="text-center">{{ entity.firstName | capitalize }}</td> #}
+            <td class="text-center">{{ entity.birthDate | date('d/m/Y')}}</td>
+            {% set now = date('now') %}
+            {% set age = now.diff(entity.birthDate).y %}     
+            <td class="text-center"> {{ age }}</td>     
+            <td class="text-center">{{ entity.type =="H" ? "Homme" : "Femme" }}</td>
+        </tr>
+            {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

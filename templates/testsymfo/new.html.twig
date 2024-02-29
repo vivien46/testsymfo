@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajout d'infos{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Formulaire d'ajout d'infos</h1>
+
+    <div class="container">
+        {{ form_start(entityForm)}}
+            {{ form_row(entityForm.name)}}
+            {{ form_row(entityForm.firstName) }}
+            {{ form_row(entityForm.birthDate) }}
+            
+            <div class="mb-3">
+            {{ form_label(entityForm.type) }}
+            <div>
+                {% for child in entityForm.type %}
+                    <div class="form-check form-check-inline">
+                        {{ form_widget(child) }}
+                        {{ form_label(child) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-sm btn-success d-flex align-items-center">{{editMode ? 'Enregistrer les infos' : 'Ajout des Infos' }}</button>
+        </div>
+        {{ form_end(entityForm)}}
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fiche de {{ entity.name}} {{entity.firstName}}{% endblock %}
+
+{% block body %}
+
+{% set birthDate = date(entity.birthDate) %} {# Convertis la date de naissance en objet DateTime #}
+{% set now = date('now') %} {# Obtient la date actuelle #}
+{% set age = now.diff(birthDate).y %} {# Calcule la différence en années #}
+
+<h1 class="text-center mb-5">Fiche de {{entity.name}} {{entity.firstName}}</h1>
+    
+<div class="container mt-3">
+    <div class="card d-flex flex-row justify-content-around mb-3">
+        <div class="card-img-fluid border bordered">
+            <img src="https://placehold.co/200x278" alt="img fiche {{ entity.name }} {{ entity.firstName}}">
+        </div>
+        <div class="card-body text-center">
+            <h2>Informations de l'individu</h2>
+            <p>Nom : {{ entity.name}}</p>
+            <p>Prénom : {{ entity.firstName}}</p>
+            <p>Date de Naissance : {{ entity.birthDate|date('d/m/Y')}}</p>
+            <p>Genre : {{ entity.type == "H" ? "Homme" : "Femme" }}</p>
+            <p>Age : {{ age }}</p>
+        </div>
+    </div>
+        <div class="card-footer mb-3 d-flex flex-row justify-content-center">
+            <button type="button" class="btn btn-sm btn-success text-dark"><a href="{{path('testsymfo_edit', {id: entity.id})}}">Modifier les informations</a></button>
+            <button type="button" class="btn btn-sm btn-danger text-dark ms-3"><a href="{{path('testsymfo_delete', {id: entity.id})}}">Supprimer l'information</a></button>
+        </div>
+</div>
+
+{% endblock %}
