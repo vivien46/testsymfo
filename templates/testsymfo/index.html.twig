@@ -33,17 +33,50 @@
 						</a>
 					</th>
 					<th scope="col" class="text-center text-dark">
-						<a href="{{ path('testsymfo_app', { sort: 'name', order: currentSortField == 'name' ? inverseSortOrder : 'asc' }) }}">Nom</th>
+						<a href="{{ path('testsymfo_app', { sort: 'name', order: currentSortField == 'name' ? inverseSortOrder : 'asc' }) }}">Nom
+                        {% if currentSortField == 'name' %}
+								{% if currentSortOrder == 'asc' %}
+									<i class="fas fa-arrow-up"></i>
+								{% else %}
+									<i class="fas fa-arrow-down"></i>
+								{% endif %}
+							{% endif %}
+                            </a>
+                        </th>
 					</th>
 					<th scope="col" class="text-center text-dark">
-						<a href="{{ path('testsymfo_app', { sort: 'firstName', order: currentSortField == 'firstName' ? inverseSortOrder : 'asc' }) }}">Prénom</th>
+						<a href="{{ path('testsymfo_app', { sort: 'firstName', order: currentSortField == 'firstName' ? inverseSortOrder : 'asc' }) }}">Prénom
+                        {% if currentSortField == 'firstName' %}
+								{% if currentSortOrder == 'asc' %}
+									<i class="fas fa-arrow-up"></i>
+								{% else %}
+									<i class="fas fa-arrow-down"></i>
+								{% endif %}
+							{% endif %}
+                            </a>
 					</th>
 					<th scope="col" class="text-center text-dark">
-						<a href="{{ path('testsymfo_app', { sort: 'birthDate', order: currentSortField == 'birthDate' ? inverseSortOrder : 'asc' }) }}">Date de Naissance</th>
-					</th>
+						<a href="{{ path('testsymfo_app', { sort: 'birthDate', order: currentSortField == 'birthDate' ? inverseSortOrder : 'asc' }) }}">Date de Naissance
+                        {% if currentSortField == 'birthDate' %}
+								{% if currentSortOrder == 'asc' %}
+									<i class="fas fa-arrow-up"></i>
+								{% else %}
+									<i class="fas fa-arrow-down"></i>
+								{% endif %}
+							{% endif %}
+                            </a>
+                    </th>
 					<th scope="col" class="text-center text-dark">Age</th>
 					<th scope="col" class="text-center text-dark">
-						<a href="{{ path('testsymfo_app', { sort: 'type', order: currentSortField == 'type' ? inverseSortOrder : 'asc' }) }}">Genre</th>
+						<a href="{{ path('testsymfo_app', { sort: 'type', order: currentSortField == 'type' ? inverseSortOrder : 'asc' }) }}">Genre
+                        {% if currentSortField == 'type' %}
+								{% if currentSortOrder == 'asc' %}
+									<i class="fas fa-arrow-up"></i>
+								{% else %}
+									<i class="fas fa-arrow-down"></i>
+								{% endif %}
+							{% endif %}
+                        </a>
 					</th>
 				</tr>
 			</thead>
