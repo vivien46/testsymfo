@@ -25,7 +25,7 @@ class TestsymfoController extends AbstractController
             $sortOrder = 'asc';
         } else {
             // Valide les champs de tri pour éviter toute manipulation indésirable
-            $validFields = ['id', 'firstName', 'lastName', 'birthDate', 'type'];
+            $validFields = ['id', 'firstName', 'name', 'birthDate', 'type'];
             $sortField = in_array($sortField, $validFields) ? $sortField : 'id';
             $sortOrder = in_array($sortOrder, ['asc', 'desc']) ? $sortOrder : 'asc';
         }
